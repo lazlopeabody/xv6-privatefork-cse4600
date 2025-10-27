@@ -554,7 +554,9 @@ cps()
   //Loop over process table looking for process with pid.
   acquire(&ptable.lock);
   cprintf("NAME-PROC\tPID\tPRIORITY\tNAME\n");
+
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    
     if(p->state == SLEEPING)
       cprintf("%s \t %d \t SLEEPING \t %d \n", p->name, p->pid, p->priority);
     else if(p->state == RUNNING)
