@@ -565,8 +565,6 @@ cps()
       cprintf("%s \t %d \t ZOMBIE \t %d \n", p->name, p->pid, p->priority);
     else if (p->state == EMBRYO)
       cprintf("%s \t %d \t EMBRYO \t %d \n", p->name, p->pid, p->priority);
-    else
-      cprintf("%s \t %d \t UNUSED \t %d \n", p->name, p->pid, p->priority);
 }
   release(&ptable.lock);
   return 22;
