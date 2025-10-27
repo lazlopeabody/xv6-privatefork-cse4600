@@ -8,6 +8,7 @@ int main(int argc, char *argv[]) {
     int pid;
     int k, n; 
     int x, z;
+    int first_child_pid = 0;
 
     if(argc < 2)
         n = 1; //Default
@@ -25,6 +26,10 @@ int main(int argc, char *argv[]) {
         } else if (pid > 0) {
             // parent process
             printf(1, "Parent %d created child %d\n", getpid(), pid);
+            // Save the first child's pid for priority change
+            if (k == 0) {
+                first_child_pid = pid;
+            }
         }
         else {
             // child process
@@ -42,9 +47,19 @@ int main(int argc, char *argv[]) {
 
     // Give children time to start, then show process list
     sleep(10);
-    printf(1, "\n=== Process List ===\n");
+    printf(1, "\n=== Process List (Before Priority Change) ===\n");
     cps();
     printf(1, "===================\n\n");
+
+    // Change priority of first child process
+    if (first_child_pid > 0) {
+        printf(1, "Changing priority of process %d to 5\n", first_child_pid);
+        chpr(first_child_pid, 5);
+        sleep(5);
+        printf(1, "\n=== Process List (After Priority Change) ===\n");
+        cps();
+        printf(1, "===================\n\n");
+    }
 
     for (k = 0; k < n; k++) {
         wait();
