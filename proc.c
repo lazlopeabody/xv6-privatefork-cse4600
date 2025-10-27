@@ -553,7 +553,7 @@ cps()
 
   //Loop over process table looking for process with pid.
   acquire(&ptable.lock);
-  cprintf("NAME-PROC\tPID\tPRIORITY\tNAME\n");
+  cprintf("NAME\tPID\tSTATE\tNAME\n");
 
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
     
