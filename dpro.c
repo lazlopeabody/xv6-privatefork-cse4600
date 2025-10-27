@@ -33,8 +33,8 @@ int main(int argc, char *argv[]) {
             for (z = 0; z < 400000000; z+=1) {
                 x = x + 3.14*89.64;     // Useless calculation to consume CPU Time
             }
+            exit();
         }
-        exit();
     }
 
     for (k = 0; k < n; k++) {
