@@ -25,17 +25,26 @@ int main(int argc, char *argv[]) {
         } else if (pid > 0) {
             // parent process
             printf(1, "Parent %d created child %d\n", getpid(), pid);
-            wait();
         }
         else {
             // child process
             printf(1, "Child %d created\n", getpid());
-            for (z = 0; z < 400000000; z+=1) {
+            for (z = 0; z < 800000000; z+=1) {
                 x = x + 3.14*89.64;     // Useless calculation to consume CPU Time
+                if (z % 100000000 == 0) {
+                    printf(1, "Child %d still running...\n", getpid());
+                }
             }
+            printf(1, "Child %d exiting\n", getpid());
             exit();
         }
     }
+
+    // Give children time to start, then show process list
+    sleep(10);
+    printf(1, "\n=== Process List ===\n");
+    cps();
+    printf(1, "===================\n\n");
 
     for (k = 0; k < n; k++) {
         wait();
